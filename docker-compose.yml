@@ -1,0 +1,23 @@
+version: '3.6'
+services:
+    mysql:
+      image: mysql
+      restart: always
+      ports:
+        - "3306:3306"
+      volumes:
+        - mysql-data:/var/lib/mysql
+        - ./db-init:/docker-entrypoint-initdb.d
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: ruling
+        MYSQL_USER: ruling
+        MYSQL_PASSWORD: r00tr00t
+    rabbitmq:
+      image: rabbitmq:management
+      ports:
+        - "5672:5672"
+        - "15672:15672"    
+volumes:
+  mysql-data:
+    name: mysql-data
